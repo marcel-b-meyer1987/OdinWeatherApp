@@ -16,6 +16,9 @@ const tempNow = document.querySelector("#today #temp");
 // global app variables
 const app = {
     tempUnit: "°C", // standard
+    weatherData: {
+        days: []
+    },
 
     init: () => {
         // 1st init on page load
@@ -23,7 +26,7 @@ const app = {
         console.log(`[DEV] Local Temperature Unit:`, app.tempUnit);
 
         // +++ GLOBAL EVENT LISTENERS: +++
-        submit.addEventListener("click", (e) => validator.handleSubmit(e, app.getWeatherData(e)));
+        submit.addEventListener("click", (e) => validator.handleSubmit(e, app.getWeatherData));
     },
 
     getLocaleTempUnit: () => {
@@ -109,13 +112,51 @@ const app = {
 
             const response = await fetch(request);
             const data = await response.json();
+            // console.log(data);
 
-            console.log(data);
+            app.weatherData.days = data.days;
+            console.log(`[DEV] app.weatherData.days`, app.weatherData.days);
 
+            if (app.weatherData.days.length > 0) app.displayWeatherData();
         }
         catch (error) {
             console.error(error);
         };
+    },
+
+    displayWeatherData: () => {
+        // Loop over app.weatherData.days, take the data of each and 
+        // populate the respective container with the data
+
+        /********
+
+        <div id="plus-0" class="daily-weather-display">
+            <span class="date-display"></span>
+            <span class="temp">7</span><span class="temp-unit">°C</span>
+            <span class="weather">Sunny</span>
+            <span class="humidity-icon"></span><span class="humidity">55</span>
+            <span class="feels-like temp">5</span><span class="temp-unit2">°C</span>
+        </div>
+
+        *********/
+
+        app.weatherData.days.forEach((day, index) => {
+
+            const container = document.querySelector(`#plus-${index}`);
+            // console.log(container);
+
+            const date = container.querySelector(".date-display");
+            const temp = container.querySelector(".temp");
+            const tempUnit = container.querySelector(".temp-unit");
+            const icon = container.querySelector(".weather");
+            const humidityIcon = container.querySelector(".humidity-icon");
+            const humidity = container.querySelector(".humidity");
+            const feelsLike = container.querySelector(".feels-like");
+            const temp2 = container.querySelector(".temp-unit2");
+
+            // update each field in turn
+
+        });
     }
 }
 

@@ -91,6 +91,7 @@ input:user-invalid ~ .error-text {
 .daily-weather-display * {
   display: flex;
   align-items: center;
+  padding: 0.25rem 0.5rem;
 }
 
 .weather {
@@ -108,7 +109,7 @@ input:user-invalid ~ .error-text {
 
 .temp-unit {
   grid-area: Temp-Unit;
-  justify-content: center;
+  justify-content: left;
 }
 
 .humidity-icon {
@@ -117,7 +118,7 @@ input:user-invalid ~ .error-text {
 
 .humidity {
   grid-area: Humidity;
-  justify-content: center;
+  justify-content: left;
 }
 
 .feels-like {
@@ -126,6 +127,6 @@ input:user-invalid ~ .error-text {
 
 .temp-unit2 {
   grid-area: Temp-Unit2;
-  justify-content: center;
+  justify-content: left;
 }
 
