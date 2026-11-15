@@ -23,10 +23,7 @@ const app = {
         console.log(`[DEV] Local Temperature Unit:`, app.tempUnit);
 
         // +++ GLOBAL EVENT LISTENERS: +++
-        submit.addEventListener("click", (e) => {
-            e.preventDefault();
-            app.getWeatherData();
-        });
+        submit.addEventListener("click", (e) => validator.handleSubmit(e, app.getWeatherData(e)));
     },
 
     getLocaleTempUnit: () => {
@@ -67,7 +64,7 @@ const app = {
             const unitDisplay = temp.nextSibling;
 
             if (temp.innerHTML != "") {
-                unitDisplay.innerHTML = this.tempUnit;
+                unitDisplay.innerHTML = app.tempUnit;
             } else {
                 unitDisplay.innerHTML = "";
             }
@@ -75,7 +72,7 @@ const app = {
     },
 
     convertFahrenheitToCelsius: (degF) => {
-        const degC = ((degF - 32) × 5 / 9);
+        const degC = ((degF - 32) * 5 / 9);
         return degC;
     },
 
@@ -88,8 +85,9 @@ const app = {
         return date.toISOString().slice(0,10);
     },
 
-    getWeatherData: async () => {
+    getWeatherData: async (e) => {
         
+        e.preventDefault(); // prevent basic submitting + reloading of the page
         const location = locationInp.value;
         
         try {
@@ -103,8 +101,8 @@ const app = {
             const fDate1 = app.formatDate(date1);
             const fDate2 = app.formatDate(date2);
 
-            console.log(`[DEV] Date1: `, fDate1);
-            console.log(`[DEV] Date2: `, fDate2);
+            // console.log(`[DEV] Date1: `, fDate1);
+            // console.log(`[DEV] Date2: `, fDate2);
             
             const request = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${fDate1}/${fDate2}`;
             console.log(`[DEV] Request URL:`, request);

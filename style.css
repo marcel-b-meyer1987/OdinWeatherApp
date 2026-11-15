@@ -30,7 +30,7 @@ input:user-valid {
 }
 
 input:user-invalid {
-  border: 2px solid #d32f2f; /* Rot */
+  border: 2px solid #f65d5d; /* Rot */
   background-color: #ffebee;
   outline: none;
 }
@@ -39,7 +39,7 @@ input:user-invalid {
 /* 2. Steuerung der Fehlermeldung */
 .error-text {
   display: none; /* Standardmäßig komplett unsichtbar */
-  color: #d32f2f;
+  color: #f65d5d;
   font-size: 0.85rem;
   margin-top: 0.4rem;
   font-weight: 500;
