@@ -88,6 +88,20 @@ const app = {
         return date.toISOString().slice(0,10);
     },
 
+    formatLocaleDate: (dateEpoch) => {
+        const dateMs = new Date(dateEpoch);
+        const options  = {
+            weekday: "short",
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+
+            // 'Mo., 16.11.2026'
+        };
+
+        return dateMs.toLocaleDateString((navigator.languages?.[0] || navigator.language || "en-US"), options)
+    },
+
     getWeatherData: async (e) => {
         
         e.preventDefault(); // prevent basic submitting + reloading of the page
@@ -143,7 +157,7 @@ const app = {
         app.weatherData.days.forEach((day, index) => {
 
             const container = document.querySelector(`#plus-${index}`);
-            // console.log(container);
+            console.log(container);
 
             const date = container.querySelector(".date-display");
             const temp = container.querySelector(".temp");
@@ -155,16 +169,16 @@ const app = {
             const temp2 = container.querySelector(".temp-unit2");
 
             // update each field in turn
-            date.innerHTML = day.date;
+            date.innerHTML = app.formatLocaleDate(day.datetimeEpoch);
             temp.innerHTML = day.temperature;
             // map weahter condition to icon + display in UI
             // humidityIcon.innerHTML = humidityIcon;
             humidity.innerHTML = day.humidity;
             feelsLike.innerHTML = day.feelsLike;
-
-            // display temp units where needed throughout the UI
-            app.displayTempUnits();
         });
+        
+        // display temp units where needed throughout the UI
+        app.displayTempUnits();
     }
 }
 
