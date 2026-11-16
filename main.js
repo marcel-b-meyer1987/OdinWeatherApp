@@ -155,7 +155,15 @@ const app = {
             const temp2 = container.querySelector(".temp-unit2");
 
             // update each field in turn
+            date.innerHTML = day.date;
+            temp.innerHTML = day.temperature;
+            // map weahter condition to icon + display in UI
+            // humidityIcon.innerHTML = humidityIcon;
+            humidity.innerHTML = day.humidity;
+            feelsLike.innerHTML = day.feelsLike;
 
+            // display temp units where needed throughout the UI
+            app.displayTempUnits();
         });
     }
 }
