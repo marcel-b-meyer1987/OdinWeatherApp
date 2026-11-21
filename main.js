@@ -20,6 +20,11 @@ const app = {
         days: []
     },
 
+    icons: {
+        humidity: "💧",
+
+    },
+
     init: () => {
         // 1st init on page load
         app.tempUnit = app.getLocaleTempUnit();
@@ -76,20 +81,20 @@ const app = {
 
     convertFahrenheitToCelsius: (degF) => {
         const degC = ((degF - 32) * 5 / 9);
-        return degC;
+        return Math.round(degC);
     },
 
     convertCelsiusToFahrenheit: (degC) => {
         const degF = (degC * 9 / 5) + 32;
-        return degF;
+        return Math.round(degF);
     },
 
     formatDate: (date) => {
         return date.toISOString().slice(0,10);
     },
 
-    formatLocaleDate: (dateEpoch) => {
-        const dateMs = new Date(dateEpoch);
+    formatLocaleDate: (datetime) => {
+        const dateMs = Date.parse(datetime);
         const options  = {
             weekday: "short",
             year: "numeric",
@@ -99,7 +104,8 @@ const app = {
             // 'Mo., 16.11.2026'
         };
 
-        return dateMs.toLocaleDateString((navigator.languages?.[0] || navigator.language || "en-US"), options)
+        const dateObj = new Date(dateMs);
+        return dateObj.toLocaleDateString((navigator.languages?.[0] || navigator.language || "en-US"), options);
     },
 
     getWeatherData: async (e) => {
@@ -121,7 +127,7 @@ const app = {
             // console.log(`[DEV] Date1: `, fDate1);
             // console.log(`[DEV] Date2: `, fDate2);
             
-            const request = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${fDate1}/${fDate2}`;
+            const request = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/${fDate1}/${fDate2}&include=days`;
             console.log(`[DEV] Request URL:`, request);
 
             const response = await fetch(request);
@@ -169,12 +175,13 @@ const app = {
             const temp2 = container.querySelector(".temp-unit2");
 
             // update each field in turn
-            date.innerHTML = app.formatLocaleDate(day.datetimeEpoch);
-            temp.innerHTML = day.temperature;
-            // map weahter condition to icon + display in UI
-            // humidityIcon.innerHTML = humidityIcon;
+            date.innerHTML = app.formatLocaleDate(day.datetime);
+            temp.innerHTML = app.tempUnit === "°C" ? app.convertFahrenheitToCelsius(day.temp) : day.temp;
+            // map weahter condition to icon + display in UI - for now just display weather condition
+            icon.innerHTML = day.conditions;
+            humidityIcon.innerHTML = app.icons.humidity;
             humidity.innerHTML = day.humidity;
-            feelsLike.innerHTML = day.feelsLike;
+            feelsLike.innerHTML = app.tempUnit === "°C" ? app.convertFahrenheitToCelsius(day.feelslike) : day.feelslike;
         });
         
         // display temp units where needed throughout the UI

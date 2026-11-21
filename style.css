@@ -73,16 +73,16 @@ input:user-invalid ~ .error-text {
 *********/
 
 .daily-weather-display {
-  width: 240px;
-  height: 160px;
+  width: fit-content;
+  height: fit-content;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas: 
-    "Icon Icon Date Date"
+    "Date Date Date Date"
     "Icon Icon Temp Temp-Unit"
-    ". . HumidityIcon Humidity"
-    ". . Feels-Like Temp-Unit2";
+    "Icon Icon Humidity HumidityIcon"
+    "Feeling Feeling Feels-Like Temp-Unit2";
 
   padding: 0.25rem 0.5rem;
   margin: 0.5rem 0.25rem;
@@ -118,7 +118,7 @@ input:user-invalid ~ .error-text {
 
 .humidity {
   grid-area: Humidity;
-  justify-content: left;
+  justify-content: right;
 }
 
 .feels-like {
