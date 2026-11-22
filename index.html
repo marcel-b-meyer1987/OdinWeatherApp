@@ -13,36 +13,35 @@
     <form action="" class="form-group">
         <input type="text" name="place" id="place" required placeholder="Enter a location">
         <span id="place-error" class="error-text"></span>
+        <div class="segmented-control">
+            <input type="radio" name="temp-unit" id="celsius" value="°C" checked>
+            <label for="celsius">°C</label>
+
+            <input type="radio" name="temp-unit" id="fahrenheit" value="°F">
+            <label for="fahrenheit">°F</label>
+
+            <span class="glider"></span>
+        </div>
         <input type="submit" value="Show Weather">
+
     </form>
 
     <div id="weather-display-container">
-        <div id="plus-0" class="daily-weather-display">
+        <!-- <div id="plus-0" class="daily-weather-display">
             <span class="date-display"></span>
-            <span class="temp">7</span><span class="temp-unit">°C</span>
+            <span class="temp"></span><span class="temp-unit"></span>
             <span class="weather">Sunny</span>
-            <span class="humidity-icon"></span><span class="humidity">55</span>
-            <span class="feels">Feels like:</span><span class="feels-like temp">5</span><span class="temp-unit2">°C</span>
+            <span class="humidity-icon"></span><span class="humidity"></span>
+            <span class="feels">Feels like:</span><span class="feels-like temp"></span><span class="temp-unit2"></span>
         </div>
 
-        
-        <div id="forecast">
-            <div id="plus-1" class="daily-weather-display">
-                
-            </div>
-            <div id="plus-2" class="daily-weather-display">
-                
-            </div>
-            <div id="plus-3" class="daily-weather-display">
-                
-            </div>
-            <div id="plus-4" class="daily-weather-display">
-                
-            </div>
-            <div id="plus-5" class="daily-weather-display">
-                
-            </div>
+        <div id="plus-1" class="daily-weather-display">
+            
         </div>
+        
+        etc.
+        
+        -->
     </div>
 </body>
 </html>
