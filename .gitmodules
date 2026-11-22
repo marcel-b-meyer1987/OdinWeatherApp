@@ -1,0 +1,3 @@
+[submodule "FormValidatorLibrary"]
+	path = FormValidatorLibrary
+	url = https://github.com/marcel-b-meyer1987/FormValidatorLibrary.git
