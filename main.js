@@ -1,4 +1,4 @@
-import { FormValidator } from "https://github.com/marcel-b-meyer1987/FormValidatorLibrary/blob/main/FormValidator.js";
+import { FormValidator } from "./FormValidatorLibrary/FormValidator.js";
 
 // +++ DOM References: +++
 
